@@ -38,8 +38,27 @@ public class Game
 		}
 	}
 	
-	public void checkGameVictory(){
-		
+	public int checkGameStatus(){
+		BoardState currentState = board.getCurrentState();
+		int row1 = currentState.rows[0];
+		int row2 = currentState.rows[1];
+		int row3 = currentState.rows[2];
+		int rowTotal = row1 + row2 + row3;
+		if(rowTotal != 0 && rowTotal != 1){
+			rowTotal = -1;
+		}
+		return rowTotal;
+	}
+	
+	public Boolean didFirstPlayerWin(){
+		Boolean result = null;
+		int gameStatus = checkGameStatus();
+		if(gameStatus == 0){
+			result = !firstPlayerTurn;
+		}else if(gameStatus == 1){
+			result = firstPlayerTurn;
+		}
+		return result;
 	}
 	
 	public void printPlayerTurnMessage(){
