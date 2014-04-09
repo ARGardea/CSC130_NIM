@@ -29,19 +29,17 @@ public class Human extends Player {
 				try{
 					int r = Integer.parseInt(response);
 					int rowTokens = currentBoard.getCurrentState().checkRow(r);
-					if(rowTokens > 0){
+					if(rowTokens > 0) {
 						//row tokens is the number of tokens in the selected row
 						//in the row selected
 						
 						boolean inputValidToken = false;
-						while(!inputValidToken)
-						{
+						while(!inputValidToken) {
 							System.out.println("Remove how many tokens?");
 							
 							int tokensToRemove = sc.nextInt();
 							
-							if(currentBoard.getCurrentState().rows[r - 1] >= tokensToRemove)
-							{
+							if(currentBoard.getCurrentState().rows[r - 1] >= tokensToRemove) {
 								currentBoard.getCurrentState().rows[r - 1] -= tokensToRemove;
 								
 								inputValidToken = true;
