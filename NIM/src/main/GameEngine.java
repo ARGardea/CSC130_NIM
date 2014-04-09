@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class GameEngine {
 	public void startMenu() {
-		Boolean userDone = false;
+		boolean userDone = false;
 		Game initGame;
 		Scanner sc = Main.scan;
 		while (!userDone) {

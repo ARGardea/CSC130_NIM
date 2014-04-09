@@ -64,7 +64,7 @@ public class Game
 		return result;
 	}
 	
-	public void printPlayerVictoryMessage(Boolean firstPlayerWin){
+	public void printPlayerVictoryMessage(boolean firstPlayerWin){
 		String currentPlayerName = "Magnificent Steven";
 		if(firstPlayerWin){
 			currentPlayerName = player1.Name;
@@ -88,7 +88,8 @@ public class Game
 
 	public void gameLoop() {
 		while (roundsToPlay > 0) {
-			Boolean gameComplete = false;
+			board = new GameBoard();
+			boolean gameComplete = false;
 			while (!gameComplete) {
 				startNewTurn();
 				Boolean firstPlayerWin = didFirstPlayerWin();

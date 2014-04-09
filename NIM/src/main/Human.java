@@ -18,7 +18,7 @@ public class Human extends Player {
 	@Override
 	public void takeTurn(GameBoard currentBoard) {
 		
-		Boolean inputValid = false;
+		boolean inputValid = false;
 		Scanner sc = Main.scan;
 		String invalidInputMessage = this.Name + ", that input is invalid.\n Please select a row by entering its number.";
 		while(!inputValid){
