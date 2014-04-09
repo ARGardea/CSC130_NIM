@@ -22,16 +22,17 @@ public class Human extends Player {
 	void takeTurn(BoardState currentState) {
 		// TODO Auto-generated method stub
 		Boolean inputValid = false;
-		String invalidInputMessage = "That input is invalid.\n Please select a row by entering its number.";
+		Scanner sc = new Scanner(System.in);
+		String invalidInputMessage = this.Name + ", that input is invalid.\n Please select a row by entering its number.";
 		while(!inputValid){
 			System.out.println(currentState.toString());
-			Scanner sc = new Scanner(System.in);
-			System.out.print("Select a row: ");
+			System.out.print(this.Name + ", select a row: ");
 			String response = sc.next();
 			if(response.length() == 1){
 				try{
 					int r = Integer.parseInt(response);
-					if(r > 0 && r < 4){
+					int rowTokens = currentState.checkRow(r);
+					if(rowTokens > 0){
 						inputValid = true;
 						System.out.println(response);
 					}else{
@@ -43,8 +44,8 @@ public class Human extends Player {
 			}else{
 				System.out.println(invalidInputMessage);
 			}
-			sc.close();
 		}
+		sc.close();
 	}
 
 }

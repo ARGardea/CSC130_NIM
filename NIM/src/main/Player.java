@@ -15,7 +15,7 @@ public abstract class Player {
 	public Player(String name){
 		this.Name = name;
 	}
-	
+
 	abstract void takeTurn(BoardState currentState);
 	
 }
