@@ -25,16 +25,7 @@ public class GameBoard {
 		return boardStates;
 	}
 	
-	@Override
-	public String toString(){
-		String result = new String();
-		result += "[";
-		for(int i: currentState.rows){
-			for(int j = 0; j < i; j++){
-				result += " x";
-			}
-			result += " ]\n";
-		}
-		return result;
+	public BoardState getCurrentState() {
+		return currentState;
 	}
 }
