@@ -35,6 +35,6 @@ public class GameBoard {
 			}
 			result += " ]\n";
 		}
-		return null;
+		return result;
 	}
 }

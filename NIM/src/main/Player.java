@@ -10,6 +10,6 @@ package main;
 public abstract class Player {
 	
 	public boolean isTurn;
-	abstract void takeTurn();
+	abstract void takeTurn(BoardState currentState);
 	
 }
