@@ -30,15 +30,15 @@ public class Game
 	public void startPvPGame()
 	{
 		GameBoard board = new GameBoard();
-		player1 = new Human();
-		player2 = new Human();
+		player1 = new Human("Player 1");
+		player2 = new Human("Player 2");
 	}
 	
 	public void startPvCGame()
 	{
 		GameBoard board = new GameBoard();
-		player1 = new Human();
-		player2 = new Computer();
+		player1 = new Human("Player");
+		player2 = new Computer("Computer");
 	}
 	
 	public void startCvCGame(int roundsToPlay)
@@ -48,7 +48,7 @@ public class Game
 			System.out.println(roundsToPlay);
 		}
 		GameBoard board = new GameBoard();
-		player1 = new Computer();
-		player2 = new Computer();
+		player1 = new Computer("Computer 1");
+		player2 = new Computer("Computer 2");
 	}
 }

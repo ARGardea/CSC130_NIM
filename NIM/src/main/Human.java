@@ -11,6 +11,10 @@ import java.util.Scanner;
  */
 public class Human extends Player {
 
+	public Human(String name) {
+		super(name);
+	}
+
 	/* (non-Javadoc)
 	 * @see main.Player#takeTurn()
 	 */
