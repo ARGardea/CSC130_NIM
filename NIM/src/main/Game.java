@@ -32,9 +32,9 @@ public class Game
 		firstPlayerTurn = !firstPlayerTurn;
 		printPlayerTurnMessage();
 		if(firstPlayerTurn){
-			player1.takeTurn(board.getCurrentState());
+			player1.takeTurn(board);
 		}else{
-			player2.takeTurn(board.getCurrentState());
+			player2.takeTurn(board);
 		}
 	}
 	
