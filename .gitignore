@@ -2,3 +2,7 @@ NIM/bin/main/Main.class
 NIM/bin/main/Game.class
 NIM/bin/main/GameType.class
 NIM/bin/main/Human.class
+NIM/bin/main/Player.class
+NIM/bin/main/Computer.class
+NIM/bin/main/BoardState.class
+*.class

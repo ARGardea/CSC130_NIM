@@ -10,6 +10,16 @@ package main;
 public class BoardState {
 	public int[] rows = new int[3];
 	
+	public int checkRow(int targetRow){
+		int result = -1;
+		try{
+			result = rows[targetRow];
+		}catch(ArrayIndexOutOfBoundsException e){
+			
+		}
+		return result;
+	}
+	
 	@Override
 	public String toString(){
 		String result = new String();
