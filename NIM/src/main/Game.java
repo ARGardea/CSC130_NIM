@@ -23,11 +23,8 @@ public class Game
 	
 	public Game(GameType type, int roundsToPlay)
 	{
-		if(type.equals(GameType.CvC))
-		{
-			System.out.println("Test complete.");
-			startPvPGame();
-		}
+		System.out.println("Test complete.");
+		startCvCGame(roundsToPlay);
 	}
 	
 	public void startPvPGame()
