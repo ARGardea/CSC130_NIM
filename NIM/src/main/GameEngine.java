@@ -32,8 +32,8 @@ public class GameEngine
 		else if(answer == 3) {
 			
 			System.out.println("How many games should the computers play?");
-			int gamesAnswer = scan.nextInt();
-			initGame = new Game(GameType.CvC, gamesAnswer);
+			int rounds = scan.nextInt();
+			initGame = new Game(GameType.CvC, rounds);
 		}
 		else {
 			System.exit(0);

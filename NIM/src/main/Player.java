@@ -16,6 +16,6 @@ public abstract class Player {
 		this.Name = name;
 	}
 
-	abstract void takeTurn(BoardState currentState);
+	abstract void takeTurn(GameBoard currentBoard);
 	
 }

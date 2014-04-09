@@ -28,4 +28,11 @@ public class GameBoard {
 	public BoardState getCurrentState() {
 		return currentState;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return currentState.toString();
+		
+	}
 }

@@ -17,7 +17,7 @@ public class Computer extends Player {
 	 * @see main.Player#takeTurn()
 	 */
 	@Override
-	public void takeTurn(BoardState currentState) {
+	public void takeTurn(GameBoard currentBoard) {
 		// TODO Auto-generated method stub
 	}
 	

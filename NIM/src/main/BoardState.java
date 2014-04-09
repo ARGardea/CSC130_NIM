@@ -13,7 +13,7 @@ public class BoardState {
 	public int checkRow(int targetRow){
 		int result = -1;
 		try{
-			result = rows[targetRow];
+			result = rows[targetRow - 1];
 		}catch(ArrayIndexOutOfBoundsException e){
 			
 		}
