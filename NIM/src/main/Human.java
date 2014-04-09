@@ -3,7 +3,7 @@ package main;
 import java.util.Scanner;
 
 /**
- * @author agardea
+ * @author agardea, nkagee
  *
  */
 public class Human extends Player {
@@ -17,7 +17,7 @@ public class Human extends Player {
 	 */
 	@Override
 	public void takeTurn(GameBoard currentBoard) {
-		// TODO Auto-generated method stub
+		
 		Boolean inputValid = false;
 		Scanner sc = new Scanner(System.in);
 		String invalidInputMessage = this.Name + ", that input is invalid.\n Please select a row by entering its number.";
@@ -26,7 +26,7 @@ public class Human extends Player {
 			System.out.print(this.Name + ", select a row: ");
 			String response = sc.next();
 			if(response.length() == 1){
-				try{
+				try {
 					int r = Integer.parseInt(response);
 					int rowTokens = currentBoard.getCurrentState().checkRow(r);
 					if(rowTokens > 0) {
@@ -45,21 +45,19 @@ public class Human extends Player {
 								inputValidToken = true;
 								inputValid = true;
 							}
-							
 							System.out.println(currentBoard.toString());
 						}
 						
-					}else{
+					} else {
 						System.out.println(invalidInputMessage);
 					}
-				}catch(java.lang.NumberFormatException e){
+				} catch (java.lang.NumberFormatException e){
 					System.out.println(invalidInputMessage);
 				}
-			}else{
+			} else {
 				System.out.println(invalidInputMessage);
 			}
 		}
 		sc.close();
 	}
-
 }
