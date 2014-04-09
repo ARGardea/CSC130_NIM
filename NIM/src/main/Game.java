@@ -8,6 +8,8 @@ public class Game
 	
 	boolean isValidTurn = true;
 	boolean firstPlayerTurn = true;
+	int numberOfTurns = 0;
+	int roundsToPlay = 0;
 	
 	public Game(GameType type)
 	{
@@ -29,13 +31,14 @@ public class Game
 	}
 	
 	public void startNewTurn(){
-		firstPlayerTurn = !firstPlayerTurn;
+		numberOfTurns++;
 		printPlayerTurnMessage();
 		if(firstPlayerTurn){
 			player1.takeTurn(board);
 		}else{
 			player2.takeTurn(board);
 		}
+		firstPlayerTurn = !firstPlayerTurn;
 	}
 	
 	public int checkGameStatus(){
@@ -54,11 +57,23 @@ public class Game
 		Boolean result = null;
 		int gameStatus = checkGameStatus();
 		if(gameStatus == 0){
-			result = !firstPlayerTurn;
-		}else if(gameStatus == 1){
 			result = firstPlayerTurn;
+		}else if(gameStatus == 1){
+			result = !firstPlayerTurn;
 		}
 		return result;
+	}
+	
+	public void printPlayerVictoryMessage(Boolean firstPlayerWin){
+		String currentPlayerName = "Magnificent Steven";
+		if(firstPlayerWin){
+			currentPlayerName = player1.Name;
+		}else{
+			currentPlayerName = player2.Name;
+		}
+		System.out.println(currentPlayerName + ", you win!");
+		System.out.println("Press any key to continue.");
+		Main.scan.next();
 	}
 	
 	public void printPlayerTurnMessage(){
@@ -70,9 +85,26 @@ public class Game
 		}
 		System.out.println(currentPlayerName + ", it's your turn!");
 	}
+
+	public void gameLoop() {
+		while (roundsToPlay > 0) {
+			Boolean gameComplete = false;
+			while (!gameComplete) {
+				startNewTurn();
+				Boolean firstPlayerWin = didFirstPlayerWin();
+				if (firstPlayerWin != null) {
+					gameComplete = true;
+					printPlayerVictoryMessage(firstPlayerWin);
+				}
+			}
+			roundsToPlay--;
+		}
+	}
 	
 	public void startPvPGame()
 	{
+		int numberOfTurns = 0;
+		roundsToPlay = 1;
 		board = new GameBoard();
 		player1 = new Human("Player 1");
 		player2 = new Human("Player 2");
@@ -80,6 +112,8 @@ public class Game
 	
 	public void startPvCGame()
 	{
+		int numberOfTurns = 0;
+		roundsToPlay = 1;
 		board = new GameBoard();
 		player1 = new Human("Player");
 		player2 = new Computer("Computer");
@@ -87,6 +121,8 @@ public class Game
 	
 	public void startCvCGame(int roundsToPlay)
 	{
+		this.roundsToPlay = roundsToPlay;
+		int numberOfTurns = 0;
 		for(int i = 0; i < roundsToPlay; i++)
 		{
 			System.out.println(roundsToPlay);

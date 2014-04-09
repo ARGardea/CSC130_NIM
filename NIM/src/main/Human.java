@@ -19,7 +19,7 @@ public class Human extends Player {
 	public void takeTurn(GameBoard currentBoard) {
 		
 		Boolean inputValid = false;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = Main.scan;
 		String invalidInputMessage = this.Name + ", that input is invalid.\n Please select a row by entering its number.";
 		while(!inputValid){
 			System.out.println(currentBoard.toString());
@@ -58,6 +58,5 @@ public class Human extends Player {
 				System.out.println(invalidInputMessage);
 			}
 		}
-		sc.close();
 	}
 }
