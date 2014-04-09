@@ -39,6 +39,7 @@ public class Human extends Player {
 			}else{
 				System.out.println(invalidInputMessage);
 			}
+			sc.close();
 		}
 	}
 
