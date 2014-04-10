@@ -27,4 +27,10 @@ public class TurnAction {
 	public void setTokenAmount(int tokenAmount) {
 		this.tokenAmount = tokenAmount;
 	}
+	
+	@Override
+	public String toString(){
+		String result = "Remove " + tokenAmount + " tokens from row " + targetRow + ".";
+		return result;
+	}
 }

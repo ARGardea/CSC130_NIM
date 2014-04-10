@@ -33,6 +33,23 @@ public class BoardState {
 		
 		int[] stateDifference = compareStates(this, stateToReach);
 		
+		int selectedRow = -1;
+		boolean movePossible = true;
+		
+		for(int i = 0; i < stateDifference.length; i++){
+			if(stateDifference[i] > 0 && selectedRow == -1){
+				selectedRow = i;
+			}else if(stateDifference[i] > 0 || stateDifference[i] < 0 || (selectedRow == -1 && i == stateDifference.length - 1)){
+				movePossible = false;
+			}
+		}
+		
+		if(movePossible){
+			System.out.println("Move is possible");
+			action = new TurnAction();
+			action.setTargetRow(selectedRow + 1);
+			action.setTokenAmount(stateDifference[selectedRow]);
+		}
 		
 		return action;
 	}
