@@ -47,13 +47,13 @@ public class Computer extends Player {
 			boolean inputValidToken = false; 
 			
 			while(!inputValidToken) {
-				
-				if(currentBoard.getCurrentState().rows[randRow - 1] >= randTokenAmount) {
-					currentBoard.getCurrentState().rows[randRow - 1] -= randTokenAmount;
+				TurnAction action = new TurnAction();
+				action.setTargetRow(randRow);
+				action.setTokenAmount(randTokenAmount);
+				boolean successful = currentBoard.getCurrentState().tryTurn(action);
+					inputValidToken = successful;
 					
-					inputValidToken = true; 
-				}
-				System.out.println("Computer chose row " + (randRow + 1) + ".\n" 
+				System.out.println("Computer chose row " + (randRow) + ".\n" 
 						+ "Computer has removed " + randTokenAmount + " from that row.");
 				System.out.println(currentBoard.toString());
 			}

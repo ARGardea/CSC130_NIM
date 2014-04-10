@@ -54,6 +54,17 @@ public class BoardState {
 		return action;
 	}
 	
+	public boolean tryTurn(TurnAction actionToTry){
+		boolean successful = false;
+		
+		if(rows[actionToTry.getTargetRow() - 1] <= actionToTry.getTokenAmount()){
+			rows[actionToTry.getTargetRow() - 1] -= actionToTry.getTokenAmount();
+			successful = true;
+		}
+		
+		return successful;
+	}
+	
 	@Override
 	public String toString(){
 		String result = new String();

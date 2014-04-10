@@ -38,15 +38,14 @@ public class Human extends Player {
 							System.out.println("Remove how many tokens?");
 							
 							int tokensToRemove = sc.nextInt();
-							
-							if(currentBoard.getCurrentState().rows[r - 1] >= tokensToRemove) {
-								currentBoard.getCurrentState().rows[r - 1] -= tokensToRemove;
-								
-								inputValidToken = true;
-								inputValid = true;
-							}
+							TurnAction action = new TurnAction();
+							action.setTargetRow(r);
+							action.setTokenAmount(tokensToRemove);
+							boolean successful = currentBoard.getCurrentState().tryTurn(action);
+								inputValidToken = successful;
+								inputValid = successful;
 							System.out.println(currentBoard.toString());
-						}
+						}			
 						
 					} else {
 						System.out.println(invalidInputMessage);
