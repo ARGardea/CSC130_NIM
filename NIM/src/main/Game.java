@@ -15,18 +15,16 @@ public class Game
 	{
 		if(type.equals(GameType.PvP))
 		{
-			System.out.println("Test complete.");
 			startPvPGame();
 		}
 		else if(type.equals(GameType.PvC))
 		{
-			System.out.println("Test 1 complete.");
+			startPvCGame();
 		}
 	}
 	
 	public Game(GameType type, int roundsToPlay)
 	{
-		System.out.println("Test complete.");
 		startCvCGame(roundsToPlay);
 	}
 	
@@ -71,9 +69,7 @@ public class Game
 		}else{
 			currentPlayerName = player2.Name;
 		}
-		System.out.println(currentPlayerName + ", you win!");
-		System.out.println("Press any key to continue.");
-		Main.scan.next();
+		System.out.println(currentPlayerName + ", you win!\n");
 	}
 	
 	public void printPlayerTurnMessage(){
@@ -104,7 +100,7 @@ public class Game
 	
 	public void startPvPGame()
 	{
-		int numberOfTurns = 0;
+		numberOfTurns = 0;
 		roundsToPlay = 1;
 		board = new GameBoard();
 		player1 = new Human("Player 1");
@@ -113,7 +109,7 @@ public class Game
 	
 	public void startPvCGame()
 	{
-		int numberOfTurns = 0;
+		numberOfTurns = 0;
 		roundsToPlay = 1;
 		board = new GameBoard();
 		player1 = new Human("Player");
@@ -123,7 +119,7 @@ public class Game
 	public void startCvCGame(int roundsToPlay)
 	{
 		this.roundsToPlay = roundsToPlay;
-		int numberOfTurns = 0;
+		numberOfTurns = 0;
 		for(int i = 0; i < roundsToPlay; i++)
 		{
 			System.out.println(roundsToPlay);

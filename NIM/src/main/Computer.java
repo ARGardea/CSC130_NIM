@@ -3,6 +3,8 @@
  */
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -22,22 +24,36 @@ public class Computer extends Player {
 	public void takeTurn(GameBoard currentBoard) {
 		Random rand = new Random();
 		
-		int randRow = rand.nextInt(3);
-		
-		int rowTokens = currentBoard.getCurrentState().checkRow(randRow);
-		int randTokenAmount = rand.nextInt(rowTokens);
+		int randRow = 0;
+		int rowTokens = 0;
+		ArrayList<Integer> validRowList = new ArrayList<Integer>();
+		int[] validRows = { 1, 2, 3 };
+		for(int i: validRows){
+			validRowList.add(i);
+		}
+		boolean selectionValid = false;
+		while(!selectionValid){
+			randRow = validRowList.get(rand.nextInt(validRowList.size()));
+			rowTokens = currentBoard.getCurrentState().checkRow(randRow);
+			if(rowTokens > 0){
+				selectionValid = true;
+			}else{
+				validRowList.remove((Object)randRow);
+			}
+		}
+		int randTokenAmount = rand.nextInt(rowTokens) + 1;
 		
 		if(rowTokens > 0) {
 			boolean inputValidToken = false; 
 			
 			while(!inputValidToken) {
 				
-				if(currentBoard.getCurrentState().rows[randRow] >= randTokenAmount) {
-					currentBoard.getCurrentState().rows[randRow] -= randTokenAmount;
+				if(currentBoard.getCurrentState().rows[randRow - 1] >= randTokenAmount) {
+					currentBoard.getCurrentState().rows[randRow - 1] -= randTokenAmount;
 					
 					inputValidToken = true; 
 				}
-				System.out.println("Computer chose row " + randRow + ".\n " 
+				System.out.println("Computer chose row " + (randRow + 1) + ".\n" 
 						+ "Computer has removed " + randTokenAmount + " from that row.");
 				System.out.println(currentBoard.toString());
 			}
