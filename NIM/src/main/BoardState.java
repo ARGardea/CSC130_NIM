@@ -20,6 +20,23 @@ public class BoardState {
 		return result;
 	}
 	
+	public int[] compareStates(BoardState stateOne, BoardState stateTwo){
+		int[] resultRows = new int[stateOne.rows.length];
+		for(int i = 0; i < resultRows.length; i++){
+			resultRows[i] = stateOne.rows[i] - stateTwo.rows[i];
+		}
+		return resultRows;
+	}
+	
+	public TurnAction howToReachState(BoardState stateToReach){
+		TurnAction action = null;
+		
+		int[] stateDifference = compareStates(this, stateToReach);
+		
+		
+		return action;
+	}
+	
 	@Override
 	public String toString(){
 		String result = new String();
