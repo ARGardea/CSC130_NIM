@@ -1,0 +1,15 @@
+Date Pushed: 4-14-2014(April 14[Monday], 2014)
+	BoardState.java (Class)
+		- Added invalidRowCode class constant (value = -1)
+		- Added noneSelected class constant (value = -2)
+		- Updated checkRow(public method) to use invalidRowCode instead of -1 ("magic number")
+		- Updated compareStates(public method) -
+			- renamed resultRows (variable) to rowDifferences for readability.
+		- Updated howToReachState(public method)
+			- renamed method to tryToReachState for readability
+			- updated to use noneSelected instead of -2 ("magic number")
+			- renamed variable (stateDifferences) to stateComparisonResults for readability
+			- added supporting predicate (representsStateDifference) for readability
+			- added variable isFirstStateDifference(boolean) for readability
+	GameEngine.java (Class)
+		- 
