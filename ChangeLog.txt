@@ -1,15 +1,123 @@
 Date Pushed: 4-14-2014(April 14[Monday], 2014)
-	BoardState.java (Class)
-		- Added invalidRowCode class constant (value = -1)
-		- Added noneSelected class constant (value = -2)
-		- Updated checkRow(public method) to use invalidRowCode instead of -1 ("magic number")
-		- Updated compareStates(public method) -
-			- renamed resultRows (variable) to rowDifferences for readability.
-		- Updated howToReachState(public method)
-			- renamed method to tryToReachState for readability
-			- updated to use noneSelected instead of -2 ("magic number")
-			- renamed variable (stateDifferences) to stateComparisonResults for readability
-			- added supporting predicate (representsStateDifference) for readability
-			- added variable isFirstStateDifference(boolean) for readability
+
+     BoardState.java (Class)
+	BEFORE:	
+		public int checkRow(int targetRow){
+			int result = -1;
+			try{
+				result = rows[targetRow - 1];
+			}catch(ArrayIndexOutOfBoundsException e){
+			}
+			return result;
+		}
+
+	AFTER:	
+		public int checkRow(int targetRow){
+			int result = 0;
+			try{
+				result = rows[targetRow - 1];
+			}catch(ArrayIndexOutOfBoundsException e){
+				result = invalidRowCode;
+			}
+			return result;
+		}
+
+	- Updated checkRow(public method) to use invalidRowCode instead of -1 ("magic number")
+
+	BEFORE: (no such variables before)
+	AFTER:
+		public static final int invalidRowCode = -1;
+		public static final int noneSelected = -2;
+
+	- Added invalidRowCode class constant (value = -1)
+	- Added noneSelected class constant (value = -2)
+
+	BEFORE:
+		public int[] compareStates(BoardState stateOne, BoardState stateTwo){
+			int[] resultRows = new int[stateOne.rows.length];
+			for(int i = 0; i < resultRows.length; i++){
+				resultRows[i] = stateOne.rows[i] - stateTwo.rows[i];
+				int[] rowDifferences = new int[stateOne.rows.length];
+			}
+			return resultRows;
+		}
+	AFTER:
+		public int[] compareStates(BoardState stateOne, BoardState stateTwo){
+			int[] rowDifferences = new int[stateOne.rows.length];
+			for(int i = 0; i < rowDifferences.length; i++){
+				rowDifferences[i] = stateOne.rows[i] - stateTwo.rows[i];
+			}
+			return rowDifferences;
+		}
+	- Updated compareStates(public method) -
+		- renamed resultRows (variable) to rowDifferences for readability.
+
+	BEFORE:
+		public TurnAction howToReachState(BoardState stateToReach){
+			TurnAction action = null;\
+		
+			int[] stateDifference = compareStates(this, stateToReach);
+		
+			int selectedRow = -1;
+			boolean movePossible = true;
+		
+			for(int i = 0; i < stateDifference.length; i++){
+				if(stateDifference[i] > 0 && selectedRow == -1){
+					selectedRow = i;
+				}else if(stateDifference[i] > 0 || stateDifference[i] < 0 || (selectedRow == -1 && i == stateDifference.length - 1)){
+					movePossible = false;
+				}
+			}
+		
+			if(movePossible){
+				System.out.println("Move is possible");
+				action = new TurnAction();
+				action.setTargetRow(selectedRow + 1);
+				action.setTokenAmount(stateDifference[selectedRow]);
+			}
+	
+			return action;
+		}
+	AFTER:
+		public TurnAction tryToReachState(BoardState stateToReach){
+			TurnAction suggestedAction = null;
+			
+			int[] stateComparisonResults = compareStates(this, stateToReach);
+			int selectedRow = noneSelected;
+			boolean movePossible = true;
+
+			for(int i = 0; i < stateComparisonResults.length; i++){
+				boolean noStateDifference = (selectedRow == noneSelected && i == stateComparisonResults.length - 1);
+				boolean isFirstStateDifference = (stateComparisonResults[i] > 0 && selectedRow == noneSelected);
+				if(isFirstStateDifference){
+					selectedRow = i;
+				}else if(representsStateDifference(stateComparisonResults[i]) || noStateDifference){
+					movePossible = false;
+				}
+			}
+		
+			if(movePossible){
+				suggestedAction = new TurnAction();
+				suggestedAction.setTargetRow(selectedRow + 1);
+				suggestedAction.setTokenAmount(stateComparisonResults[selectedRow]);
+			}
+
+			return suggestedAction;
+		}	
+
+		public boolean representsStateDifference(int testedValue){
+			boolean representsDifference = (testedValue != 0);
+			return representsDifference;
+		}
+
+
+	- Updated howToReachState(public method)
+		- renamed method to tryToReachState for readability
+		- updated to use noneSelected instead of -2 ("magic number")
+		- renamed variable (stateDifferences) to stateComparisonResults for readability
+		- added supporting predicate (representsStateDifference) for readability
+		- added variable isFirstStateDifference(boolean) for readability
+
+
 	GameEngine.java (Class)
 		- 
