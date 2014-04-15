@@ -66,8 +66,11 @@ public class BoardState {
 	public boolean tryTurn(TurnAction actionToTry){
 		boolean successful = false;
 		
-		if(rows[actionToTry.getTargetRow() - 1] <= actionToTry.getTokenAmount()){
-			rows[actionToTry.getTargetRow() - 1] -= actionToTry.getTokenAmount();
+		int tokenAmount = actionToTry.getTokenAmount();
+		int targetedRowCount = actionToTry.getTargetRow() - 1;
+		
+		if(rows[targetedRowCount] >= tokenAmount){
+			rows[targetedRowCount] -= tokenAmount;
 			successful = true;
 		}
 		
