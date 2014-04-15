@@ -6,3 +6,4 @@ NIM/bin/main/Player.class
 NIM/bin/main/Computer.class
 NIM/bin/main/BoardState.class
 *.class
+*.tmp

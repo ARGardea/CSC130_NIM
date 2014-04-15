@@ -31,28 +31,27 @@ public class Computer extends Player {
 		for(int i: validRowNumberValues){
 			validRowNumbers.add(i);
 		}
-		boolean selectionValid = false;
-		while(!selectionValid){
+		boolean selectionNotValid = true;
+		while(selectionNotValid){
 			randomlySelectedRow = validRowNumbers.get(rand.nextInt(validRowNumbers.size()));
 			tokensInRow = currentBoard.getCurrentState().checkRow(randomlySelectedRow);
-			selectionValid = (tokensInRow > 0)?true:validRowNumbers.remove((Object)randomlySelectedRow);
+			selectionNotValid = (tokensInRow > 0)?false:validRowNumbers.remove((Object)randomlySelectedRow);
 		}
 		int randTokenAmount = rand.nextInt(tokensInRow) + 1;
 		
 		if(tokensInRow > 0) {
-			boolean inputValidToken = false; 
+			boolean tokenAmountInvalid = true; 
 			
-			while(!inputValidToken) {
+			while(tokenAmountInvalid) {
 				TurnAction action = new TurnAction();
 				action.setTargetRow(randomlySelectedRow);
 				action.setTokenAmount(randTokenAmount);
-				boolean successful = currentBoard.getCurrentState().tryTurn(action);
-					inputValidToken = successful;
-					
-				System.out.println("Computer chose row " + (randomlySelectedRow) + ".\n" 
-						+ "Computer has removed " + randTokenAmount + " from that row.");
-				System.out.println(currentBoard.toString());
+				boolean turnSuccessful = currentBoard.getCurrentState().tryTurn(action);
+				tokenAmountInvalid = !turnSuccessful;
 			}
+			System.out.println("Computer chose row " + (randomlySelectedRow) + ".\n" 
+					+ "Computer has removed " + randTokenAmount + " from that row.");
+			System.out.println(currentBoard.toString());
 		}
 	}
 	
