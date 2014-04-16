@@ -4,7 +4,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -42,7 +41,7 @@ public class Computer extends Player {
 		TurnAction action = new TurnAction();
 		action.setTargetRow(randomlySelectedRow);
 		action.setTokenAmount(randTokenAmount);
-		boolean turnSuccessful = currentBoard.getCurrentState().tryTurn(action);
+		
 		System.out.println("Computer chose row " + (randomlySelectedRow) + ".\n" 
 				+ "Computer has removed " + randTokenAmount + " from that row.");
 		System.out.println(currentBoard.toString());
