@@ -18,10 +18,10 @@ public class Human extends Player {
 	@Override
 	public void takeTurn(GameBoard currentBoard) {
 		
-		boolean inputValid = true;
+		boolean inputInvalid = true;
 		Scanner sc = Main.Scan;
 		String invalidInputMessage = this.Name + ", that input is invalid.\n Please select a row by entering its number.";
-		while(inputValid){
+		while(inputInvalid){
 			System.out.println(currentBoard.toString());
 			System.out.print(this.Name + ", select a row: ");
 			String response = sc.next();
@@ -33,8 +33,8 @@ public class Human extends Player {
 						//row tokens is the number of tokens in the selected row
 						//in the row selected
 						
-						boolean inputValidToken = true;
-						while(inputValidToken) {
+						boolean inputInvalidToken = true;
+						while(inputInvalidToken) {
 							System.out.println("Remove how many tokens?");
 							
 							int tokensToRemove = sc.nextInt();
@@ -42,8 +42,8 @@ public class Human extends Player {
 							action.setTargetRow(r);
 							action.setTokenAmount(tokensToRemove);
 							boolean successful = currentBoard.getCurrentState().tryTurn(action);
-								inputValidToken = !successful;
-								inputValid = !successful;
+								inputInvalidToken = !successful;
+								inputInvalid = !successful;
 							System.out.println(currentBoard.toString());
 						}			
 						
