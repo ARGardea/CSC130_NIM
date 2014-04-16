@@ -39,20 +39,13 @@ public class Computer extends Player {
 		}
 		int randTokenAmount = rand.nextInt(tokensInRow) + 1;
 		
-		if(tokensInRow > 0) {
-			boolean tokenAmountInvalid = true; 
-			
-			while(tokenAmountInvalid) {
-				TurnAction action = new TurnAction();
-				action.setTargetRow(randomlySelectedRow);
-				action.setTokenAmount(randTokenAmount);
-				boolean turnSuccessful = currentBoard.getCurrentState().tryTurn(action);
-				tokenAmountInvalid = !turnSuccessful;
-			}
-			System.out.println("Computer chose row " + (randomlySelectedRow) + ".\n" 
-					+ "Computer has removed " + randTokenAmount + " from that row.");
-			System.out.println(currentBoard.toString());
-		}
+		TurnAction action = new TurnAction();
+		action.setTargetRow(randomlySelectedRow);
+		action.setTokenAmount(randTokenAmount);
+		boolean turnSuccessful = currentBoard.getCurrentState().tryTurn(action);
+		System.out.println("Computer chose row " + (randomlySelectedRow) + ".\n" 
+				+ "Computer has removed " + randTokenAmount + " from that row.");
+		System.out.println(currentBoard.toString());
 	}
 	
 	public void evaluateChoice(){
