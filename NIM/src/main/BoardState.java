@@ -12,7 +12,7 @@ public class BoardState {
 	//     Changes will need to be made in classes that refer to these arrays as well.
 	public int[] rows = new int[3];
 	public static final int invalidRowCode = -1;
-	public static final int noneSelected = -2;
+	public static final int noRowSelected = -2;
 	
 	public int checkRow(int targetRow){
 		int result = 0;
@@ -32,16 +32,16 @@ public class BoardState {
 		return rowDifferences;
 	}
 	
-	public TurnAction tryToReachState(BoardState stateToReach){
+	public TurnAction tryToReachBoardState(BoardState stateToReach){
 		TurnAction suggestedAction = null;
 		
 		int[] stateComparisonResults = compareStates(this, stateToReach);
-		int selectedRow = noneSelected;
+		int selectedRow = noRowSelected;
 		boolean movePossible = true;
 		
 		for(int i = 0; i < stateComparisonResults.length; i++){
-			boolean noStateDifference = (selectedRow == noneSelected && i == stateComparisonResults.length - 1);
-			boolean isFirstStateDifference = (stateComparisonResults[i] > 0 && selectedRow == noneSelected);
+			boolean noStateDifference = (selectedRow == noRowSelected && i == stateComparisonResults.length - 1);
+			boolean isFirstStateDifference = (stateComparisonResults[i] > 0 && selectedRow == noRowSelected);
 			if(isFirstStateDifference){
 				selectedRow = i;
 			}else if(representsStateDifference(stateComparisonResults[i]) || noStateDifference){
