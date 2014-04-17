@@ -88,39 +88,34 @@ public class Game
 	}
 	
 	public void startPvPGame() {
-		numberOfTurns = 0;
-		roundsToPlay = 1;
-		history = new GameHistory();
-		board = new GameBoard();
 		player1 = new Human("Player 1");
 		player2 = new Human("Player 2");
+		setUpGame(GameType.PvP);
 		
-		history.addState(board.getCurrentState());
 	}
 	
 	public void startPvCGame() {
-		numberOfTurns = 0;
-		roundsToPlay = 1;
-		history = new GameHistory();
-		board = new GameBoard();
 		player1 = new Human("Player");
 		player2 = new Computer("Computer");
-		
-		history.addState(board.getCurrentState());
+		setUpGame(GameType.PvC);
 	}
 	
 	public void startCvCGame(int roundsToPlay) {
 		this.roundsToPlay = roundsToPlay;
 		numberOfTurns = 0;
-		for(int i = 0; i < roundsToPlay; i++)
-		{
-			System.out.println(roundsToPlay);
-		}
-		history = new GameHistory();
-		board = new GameBoard();
 		player1 = new Computer("Computer 1");
 		player2 = new Computer("Computer 2");
+		setUpGame(GameType.CvC);
+	}
+	
+	public void setUpGame(GameType type) {
+		if(type.equals(GameType.PvP) || type.equals(GameType.PvC)) {
+			numberOfTurns = 0;
+			roundsToPlay = 1;
+		}
 		
+		history = new GameHistory();
+		board = new GameBoard();
 		history.addState(board.getCurrentState());
 	}
 }
