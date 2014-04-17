@@ -1,13 +1,23 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GameHistory
 {
 	private ArrayList<BoardState> stateList;
+	private boolean wasLastStateWin;
 	
 	public GameHistory() {
 		stateList = new ArrayList<BoardState>();
+	}
+	
+	public void calculateLastStateWin(){
+		wasLastStateWin = (stateList.get(stateList.size() - 1).getBoardStateRowSum() == 0);
+	}
+	
+	public boolean wasLastBoardStateWin(){
+		return wasLastStateWin;
 	}
 	
 	public void addState(BoardState boardState) {
@@ -18,7 +28,11 @@ public class GameHistory
 		stateList.remove(boardState);
 	}
 	
-	public ArrayList<BoardState> getStateList() {
-		return stateList;
+	public int getNumberOfBoardStates(){
+		return stateList.size();
+	}
+	
+	public Iterator<BoardState> getStateList() {
+		return stateList.iterator();
 	}
 }

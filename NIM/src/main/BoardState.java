@@ -63,6 +63,29 @@ public class BoardState {
 		return representsDifference;
 	}
 	
+	public int getBoardStateRowSum(){
+		int rowSum = 0;
+		
+		for(int tokenNumber: rows){
+			rowSum += tokenNumber;
+		}
+		
+		return rowSum;
+	}
+	
+	public int getBoardStateCode(){
+		String concatenatedRowValues = "";
+		int boardStateCode = 0;
+		
+		for(int rowTokens: rows){
+			concatenatedRowValues += rowTokens;
+		}
+		
+		boardStateCode = Integer.parseInt(concatenatedRowValues);
+		
+		return boardStateCode;
+	}
+	
 	public boolean tryTurn(TurnAction actionToTry){
 		boolean successful = false;
 		

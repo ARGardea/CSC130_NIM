@@ -41,14 +41,7 @@ public class Game
 	
 	public int checkGameStatus() {
 		BoardState currentState = board.getCurrentState();
-		int row1 = currentState.rows[0];
-		int row2 = currentState.rows[1];
-		int row3 = currentState.rows[2];
-		int rowTotal = row1 + row2 + row3;
-		if(rowTotal != 0 && rowTotal != 1){
-			rowTotal = -1;
-		}
-		return rowTotal;
+		return currentState.getBoardStateRowSum();
 	}
 	
 	public Boolean didFirstPlayerWin() {
@@ -74,11 +67,7 @@ public class Game
 	
 	public void printPlayerTurnMessage() {
 		String currentPlayerName = "Magnificent Steven";
-		if(firstPlayerTurn){
-			currentPlayerName = player1.Name;
-		} else {
-			currentPlayerName = player2.Name;
-		}
+		currentPlayerName = (firstPlayerTurn)? player1.Name:player2.Name;
 		System.out.println(currentPlayerName + ", it's your turn!");
 	}
 
