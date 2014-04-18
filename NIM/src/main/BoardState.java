@@ -3,6 +3,10 @@
  */
 package main;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * @author agardea
  *
@@ -24,38 +28,61 @@ public class BoardState {
 		return result;
 	}
 	
-	public int[] compareStates(BoardState stateOne, BoardState stateTwo){
-		int[] rowDifferences = new int[stateOne.rows.length];
-		for(int i = 0; i < rowDifferences.length; i++){
-			rowDifferences[i] = stateOne.rows[i] - stateTwo.rows[i];
+	public Iterator<Integer> compareStates(BoardState stateOne, BoardState stateTwo){
+		ArrayList<Integer> rowDifferences = new ArrayList<Integer>();
+		for(int i = 0; i < rowDifferences.size(); i++){
+			rowDifferences.add(stateOne.rows[i] - stateTwo.rows[i]);
 		}
-		return rowDifferences;
+		return rowDifferences.iterator();
 	}
 	
 	public TurnAction tryToReachBoardState(BoardState stateToReach){
 		TurnAction suggestedAction = null;
 		
-		int[] stateComparisonResults = compareStates(this, stateToReach);
+		Iterator stateComparisonResults = compareStates(this, stateToReach);
 		int selectedRow = noRowSelected;
+		int selectedRowTokens = 0;
 		boolean movePossible = true;
 		
-		for(int i = 0; i < stateComparisonResults.length; i++){
-			boolean noStateDifference = (selectedRow == noRowSelected && i == stateComparisonResults.length - 1);
-			boolean isFirstStateDifference = (stateComparisonResults[i] > 0 && selectedRow == noRowSelected);
-			if(isFirstStateDifference){
-				selectedRow = i;
-			}else if(representsStateDifference(stateComparisonResults[i]) || noStateDifference){
+		int checkedRowTokens = 0;
+		int rowNumber = 1;
+		
+		boolean comparisonInProgress = stateComparisonResults.hasNext();
+		
+		while(comparisonInProgress){
+			checkedRowTokens = (Integer)stateComparisonResults.next();
+			comparisonInProgress = stateComparisonResults.hasNext();
+			
+			if(representsTokensRemoved(checkedRowTokens)){
+				if(selectedRow == noRowSelected){
+					selectedRow = rowNumber;
+					selectedRowTokens = checkedRowTokens;
+				}else{
+					comparisonInProgress = false;
+					movePossible = false;
+				}
+			}else if(representsTokensAdded(checkedRowTokens)){
+				comparisonInProgress = false;
 				movePossible = false;
 			}
+			rowNumber++;
 		}
 		
 		if(movePossible){
 			suggestedAction = new TurnAction();
-			suggestedAction.setTargetRow(selectedRow + 1);
-			suggestedAction.setTokenAmount(stateComparisonResults[selectedRow]);
+			suggestedAction.setTargetRow(selectedRow);
+			suggestedAction.setTokenAmount(selectedRowTokens);
 		}
 		 
 		return suggestedAction;
+	}
+	
+	public boolean representsTokensAdded(int testedValue){
+		return (testedValue < 0);
+	}
+	
+	public boolean representsTokensRemoved(int testedValue){
+		return (testedValue > 0);
 	}
 	
 	public boolean representsStateDifference(int testedValue){
