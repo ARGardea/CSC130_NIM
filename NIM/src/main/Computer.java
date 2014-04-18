@@ -45,6 +45,7 @@ public class Computer extends Player {
 		System.out.println("Computer chose row " + (randomlySelectedRow) + ".\n" 
 				+ "Computer has removed " + randTokenAmount + " from that row.");
 		System.out.println(currentBoard.toString());
+		currentBoard.MakeMove(action);
 	}
 	
 	public void evaluateChoice(){

@@ -29,6 +29,10 @@ public class GameBoard {
 		return currentState;
 	}
 	
+	public void MakeMove(TurnAction move){
+		currentState.tryTurn(move);
+	}
+	
 	@Override
 	public String toString()
 	{

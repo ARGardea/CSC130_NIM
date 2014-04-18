@@ -26,21 +26,24 @@ public class GameEngine {
 
 			try {
 				int answer = Integer.parseInt(sc.next());
-				
+				initGame = new Game();
 				if (answer == pvpCode) {
-					initGame = new Game(GameType.PvP);
-					initGame.gameLoop();
+					initGame.setGameType(GameType.PvP);
 				} else if (answer == pvcCode) {
-					initGame = new Game(GameType.PvC);
-					initGame.gameLoop();
+					initGame.setGameType(GameType.PvC);
 				} else if (answer == cvcCode) {
 					System.out
 							.println("How many games should the computers play?");
 					int rounds = sc.nextInt();
-					initGame = new Game(GameType.CvC, rounds);
-					initGame.gameLoop();
+					initGame.setGameType(GameType.CvC);
+					initGame.setRoundsToPlay(rounds);
 				} else {
 					userDone = true;
+				}
+				
+				if(!userDone){
+					initGame.setupGame();
+					initGame.gameLoop();
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("That input is not valid.\n");

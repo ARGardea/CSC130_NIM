@@ -5,24 +5,24 @@ public class Game
 	Player player1;
 	Player player2;
 	GameBoard board;
-	GameHistory history; 
+	GameHistory history;
+	
+	GameType type;
 	
 	boolean isValidTurn = true;
 	boolean firstPlayerTurn = true;
 	int numberOfTurns = 0;
 	int roundsToPlay = 0;
 	
-	public Game(GameType type) {
-		if(type.equals(GameType.PvP)) {
-			startPvPGame();
-		}
-		else if(type.equals(GameType.PvC)) {
-			startPvCGame();
-		}
+	public Game() {
 	}
 	
-	public Game(GameType type, int roundsToPlay) {
-		startCvCGame(roundsToPlay);
+	public void setRoundsToPlay(int roundsToPlay){
+		this.roundsToPlay = roundsToPlay;
+	}
+	
+	public void setGameType(GameType type){
+		this.type = type;
 	}
 	
 	public void startNewTurn() {
@@ -87,28 +87,23 @@ public class Game
 		}
 	}
 	
-	public void startPvPGame() {
-		player1 = new Human("Player 1");
-		player2 = new Human("Player 2");
-		setupGame(GameType.PvP);
+	public void setupGame() {
 		
-	}
-	
-	public void startPvCGame() {
-		player1 = new Human("Player");
-		player2 = new Computer("Computer");
-		setupGame(GameType.PvC);
-	}
-	
-	public void startCvCGame(int roundsToPlay) {
-		this.roundsToPlay = roundsToPlay;
-		numberOfTurns = 0;
-		player1 = new Computer("Computer 1");
-		player2 = new Computer("Computer 2");
-		setupGame(GameType.CvC);
-	}
-	
-	public void setupGame(GameType type) {
+		switch(type){
+			case PvP:
+				player1 = new Human("Player 1");
+				player2 = new Human("Player 2");
+				break;
+			case PvC:
+				player1 = new Human("Player");
+				player2 = new Computer("Computer");
+				break;
+			case CvC:
+				player1 = new Computer("Computer 1");
+				player2 = new Computer("Computer 2");
+				break;
+		}
+		
 		if(type.equals(GameType.PvP) || type.equals(GameType.PvC)) {
 			numberOfTurns = 0;
 			roundsToPlay = 1;
