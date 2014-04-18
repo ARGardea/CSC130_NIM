@@ -35,7 +35,30 @@ public class TurnEvaluator
 		}
 	}
 	
-	public boolean didBoardStateEqualWin(BoardState stateToJudge){
-		return (stateToJudge.getBoardStateRowSum() == 0);
+	public Iterator<Integer> calculateLosingScores(int numberOfTurns){
+		int numberOfScores = (numberOfTurns%2==0)? ((numberOfTurns/2)-1):(numberOfTurns/2);
+		ArrayList<Integer> scores = new ArrayList<Integer>();
+		int multiplier = -1;
+		
+		return scores.iterator();
+	}
+	
+	public Iterator<Float> calculateScores(int numberOfScores, int multiplier){
+		ArrayList<Float> scores = new ArrayList<Float>();
+		
+		for(int i = 1; !(i>numberOfScores); i++){
+			Float score = (float)(((float)i/(float)numberOfScores)*(float)multiplier);
+			scores.add(score);
+		}
+		
+		return scores.iterator();
+	}
+	
+	public Iterator<Integer> calculateWinningScores(int numberOfTurns){
+		int numberOfScores = (numberOfTurns%2==0)? (numberOfTurns/2):((numberOfTurns/2) -1);
+		ArrayList<Integer> scores = new ArrayList<Integer>();
+		int multiplier = -1;
+		
+		return scores.iterator();
 	}
 }
