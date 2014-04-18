@@ -93,20 +93,17 @@ public class Game
 			case PvP:
 				player1 = new Human("Player 1");
 				player2 = new Human("Player 2");
+				roundsToPlay = 1;
 				break;
 			case PvC:
 				player1 = new Human("Player");
 				player2 = new Computer("Computer");
+				roundsToPlay = 1;
 				break;
 			case CvC:
 				player1 = new Computer("Computer 1");
 				player2 = new Computer("Computer 2");
 				break;
-		}
-		
-		if(type.equals(GameType.PvP) || type.equals(GameType.PvC)) {
-			numberOfTurns = 0;
-			roundsToPlay = 1;
 		}
 		
 		history = new GameHistory();
