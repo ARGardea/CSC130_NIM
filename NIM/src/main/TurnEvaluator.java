@@ -8,11 +8,11 @@ import java.util.List;
 public class TurnEvaluator
 {
 	private ArrayList<GameHistory> historyList;
-	private HashMap turnScores;
+	private HashMap<Integer, Integer> turnScores;
 	
 	public TurnEvaluator() {
 		historyList = new ArrayList<GameHistory>();
-		turnScores = new HashMap();
+		turnScores = new HashMap<Integer, Integer>();
 	}
 	
 	public ArrayList<GameHistory> getHistoryList() {
