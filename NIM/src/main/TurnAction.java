@@ -3,6 +3,7 @@ package main;
 public class TurnAction {
 	private int targetRow;
 	private int tokenAmount;
+	private BoardState targetState;
 	/**
 	 * @return the targetRow
 	 */
@@ -15,6 +16,15 @@ public class TurnAction {
 	public void setTargetRow(int targetRow) {
 		this.targetRow = targetRow;
 	}
+	
+	public void setTargetState(BoardState targetState){
+		this.targetState = targetState;
+	}
+	
+	public BoardState getTargetState(){
+		return targetState;
+	}
+	
 	/**
 	 * @return the tokenAmount
 	 */
