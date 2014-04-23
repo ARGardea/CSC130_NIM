@@ -16,14 +16,8 @@ public class GameEngine {
 	public void startMenu() {
 		userDone = false;
 		Scanner sc = Main.Scan;
-		int pvpCode = 1;
-		int pvcCode = 2;
-		int cvcCode = 3;
 		while (!userDone) {
 			System.out.println("Welcome to NIM. Choose game option:");
-//			System.out.println(pvpCode + " - Player vs. Player \n"
-//					+ pvcCode + " - Player vs. Computer \n"
-//					+ cvcCode + " - Computer vs. Computer \n" + "Any Other Value - Exit");
 			try {
 				int menuNumber = 0;
 				for(MenuOption option: MenuOption.values()){
@@ -35,20 +29,6 @@ public class GameEngine {
 				runningGame = new Game();
 				
 				MenuOption.getValue(answer).execute(this);
-				
-//				if (answer == pvpCode) {
-//					initGame.setGameType(GameType.PvP);
-//				} else if (answer == pvcCode) {
-//					initGame.setGameType(GameType.PvC);
-//				} else if (answer == cvcCode) {
-//					System.out
-//							.println("How many games should the computers play?");
-//					int rounds = sc.nextInt();
-//					initGame.setGameType(GameType.CvC);
-//					initGame.setRoundsToPlay(rounds);
-//				} else {
-//					userDone = true;
-//				}
 				
 				if(!userDone){
 					runningGame.setupGame();
