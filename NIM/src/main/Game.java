@@ -15,6 +15,7 @@ public class Game
 	int roundsToPlay = 0;
 	
 	public Game() {
+		this.roundsToPlay = 1;
 	}
 	
 	public void setRoundsToPlay(int roundsToPlay){
@@ -87,27 +88,40 @@ public class Game
 		}
 	}
 	
+	public void setPlayers(Player player1, Player player2) {
+		this.player1 = player1; 
+		this.player2 = player2;
+	}
+	
 	public void setupGame() {
-		
-		switch(type){
-			case PvP:
-				player1 = new Human("Player 1");
-				player2 = new Human("Player 2");
-				roundsToPlay = 1;
-				break;
-			case PvC:
-				player1 = new Human("Player");
-				player2 = new Computer("Computer");
-				roundsToPlay = 1;
-				break;
-			case CvC:
-				player1 = new Computer("Computer 1");
-				player2 = new Computer("Computer 2");
-				break;
-		}
-		
 		history = new GameHistory();
 		board = new GameBoard();
 		history.addState(board.getCurrentState());
+		type.createPlayers(this);
 	}
 }
+
+enum GameType
+{
+	PvP {
+		@Override 
+		void createPlayers(Game game){
+			game.setPlayers(new Human("Player 1"), new Human("Player 2"));
+		}
+	},
+	PvC{
+		@Override 
+		void createPlayers(Game game){
+			game.setPlayers(new Human("Player"), new Computer("Computer"));
+		}
+	},
+	CvC{
+		@Override 
+		void createPlayers(Game game){
+			game.setPlayers(new Computer("Computer 1"), new Computer("Computer 2"));
+		}
+	};
+
+	abstract void createPlayers(Game game);
+}
+
