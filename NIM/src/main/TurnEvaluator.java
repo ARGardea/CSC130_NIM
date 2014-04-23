@@ -66,7 +66,7 @@ public class TurnEvaluator
 	public Iterator<Integer> compareStates(BoardState stateOne, BoardState stateTwo){
 		ArrayList<Integer> rowDifferences = new ArrayList<Integer>();
 		for(int i = 0; i < rowDifferences.size(); i++){
-			rowDifferences.add(stateOne.rows[i] - stateTwo.rows[i]);
+			rowDifferences.add(stateOne.checkRow(i + 1) - stateTwo.checkRow(i + 1));
 		}
 		return rowDifferences.iterator();
 	}
@@ -94,7 +94,7 @@ public class TurnEvaluator
 					selectedRowTokens = checkedRowTokens;
 				}else{
 					comparisonInProgress = false;
-					movePossible = false;
+					movePossible = false;	
 				}
 			}else if(representsTokensAdded(checkedRowTokens)){
 				comparisonInProgress = false;

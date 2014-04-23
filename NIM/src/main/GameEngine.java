@@ -23,7 +23,6 @@ public class GameEngine {
 			System.out.println(pvpCode + " - Player vs. Player \n"
 					+ pvcCode + " - Player vs. Computer \n"
 					+ cvcCode + " - Computer vs. Computer \n" + "Any Other Value - Exit");
-
 			try {
 				int answer = Integer.parseInt(sc.next());
 				initGame = new Game();

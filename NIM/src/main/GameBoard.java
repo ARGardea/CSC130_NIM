@@ -14,8 +14,7 @@ public class GameBoard {
 	private BoardState currentState;
 	
 	public GameBoard(){
-		currentState = new BoardState();
-		currentState.rows = new int[] {3, 5, 7};
+		currentState = new BoardState(new int[] {3, 5, 7});
 	}
 
 	/**

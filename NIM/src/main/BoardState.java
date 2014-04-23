@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class BoardState implements Iterable{
 	//TODO: revise code so that semantic arrays are NOT used
 	//     Changes will need to be made in classes that refer to these arrays as well.
-	public int[] rows = new int[3];
+	private int[] rows = new int[3];
 	public static final int invalidRowCode = -1;
 	public static final int noRowSelected = -2;
 	
@@ -34,6 +34,14 @@ public class BoardState implements Iterable{
 			result = invalidRowCode;
 		}
 		return result;
+	}
+	
+	public int getNumberOfRows(){
+		return rows.length;
+	}
+	
+	public void setTokensInRow(int targetRow, int numberOfTokens) throws IndexOutOfBoundsException{
+		rows[targetRow - 1] = numberOfTokens;
 	}
 	
 	public int getBoardStateRowSum(){
@@ -73,6 +81,10 @@ public class BoardState implements Iterable{
 		return successful;
 	}
 	
+	public int[] cloneRows(){
+		return rows.clone();
+	}
+	
 	@Override
 	public String toString(){
 		String result = new String();
@@ -106,8 +118,9 @@ class PossibleStateIterator implements Iterator{
 	
 	void setIteratedState(BoardState state){
 		this.iteratedState = state;
-		this.maxRowNumber = state.rows.length;
-		this.rowTokens = state.rows[currentRow];
+		this.maxRowNumber = state.getNumberOfRows();
+		this.currentRow = 1;
+		this.rowTokens = state.checkRow(currentRow);
 	}
 	
 	@Override
@@ -145,18 +158,18 @@ class PossibleStateIterator implements Iterator{
 		// TODO Auto-generated method stub
 		TurnAction nextPossibleAction = null;
 		int checkedRow = currentRow;
-		int checkedTokens = iteratedState.rows[checkedRow] - 1;
+		int checkedTokens = iteratedState.checkRow(checkedRow)- 1;
 		boolean searchingForNext = !(checkedTokens >= 0);
 		while(searchingForNext){
-			checkedTokens = iteratedState.rows[checkedRow] - 1;
+			checkedTokens = iteratedState.checkRow(checkedRow)- 1;
 			boolean tokensValid = (checkedTokens >= 0);
 			if(tokensValid){
 				searchingForNext = false;
 				nextPossibleAction = new TurnAction();
-				BoardState nextPossibleState = new BoardState(iteratedState.rows.clone());
-				nextPossibleState.rows[checkedRow] = checkedTokens;
+				BoardState nextPossibleState = new BoardState(iteratedState.cloneRows());
+				nextPossibleState.setTokensInRow(checkedRow, checkedTokens);
 				nextPossibleAction.setTargetRow(checkedRow);
-				nextPossibleAction.setTokenAmount(nextPossibleState.rows[checkedRow]-checkedTokens);
+				nextPossibleAction.setTokenAmount(nextPossibleState.checkRow(checkedRow)-checkedTokens);
 			}else if(checkedRow != maxRowNumber){
 				checkedRow++;
 			}
