@@ -3,7 +3,6 @@
  */
 package main;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -26,14 +25,13 @@ public class GameEngine {
 				}
 				
 				int answer = Integer.parseInt(sc.next());
-				runningGame = new Game();
 				
 				MenuOption.getValue(answer).execute(this);
 				
-				if(!userDone){
-					runningGame.setupGame();
-					runningGame.gameLoop();
+				if(!userDone) {
+					runningGame.gameLoop(MenuOption.getValue(answer).getGameRounds());
 				}
+				
 			} catch (NumberFormatException|IndexOutOfBoundsException e) {
 				System.out.println("That input is not valid.\n");
 			}
@@ -44,13 +42,10 @@ public class GameEngine {
 		userDone = valueToSet;
 	}
 	
-	public void SetGameType(GameType typeToSet){
-		runningGame.setGameType(typeToSet);
-	}
-	
-	public void setGameRounds(int numberOfRounds){
-		runningGame.setRoundsToPlay(numberOfRounds);
-	}
+//	
+//	public void setGameRounds(int numberOfRounds){
+//		runningGame.setRoundsToPlay(numberOfRounds);
+//	}
 }
 
 enum MenuOption{
@@ -59,13 +54,20 @@ enum MenuOption{
 		@Override
 		void execute(GameEngine engine) {
 			// TODO Auto-generated method stub
-			engine.runningGame.setGameType(GameType.PvP);
+			engine.runningGame = new Game(GameType.PvP);
 		}
 
 		@Override
 		String getPrompt() {
 			// TODO Auto-generated method stub
 			return "Player vs. Player";
+		}
+
+		@Override
+		int getGameRounds()
+		{
+			// TODO Auto-generated method stub
+			return 1;
 		}
 	},
 	
@@ -74,13 +76,20 @@ enum MenuOption{
 		@Override
 		void execute(GameEngine engine) {
 			// TODO Auto-generated method stub
-			engine.runningGame.setGameType(GameType.PvC);
+			engine.runningGame = new Game(GameType.PvC);
 		}
 
 		@Override
 		String getPrompt() {
 			// TODO Auto-generated method stub
 			return "Player vs. Computer";
+		}
+
+		@Override
+		int getGameRounds()
+		{
+			// TODO Auto-generated method stub
+			return 1;
 		}
 		
 	},
@@ -90,16 +99,21 @@ enum MenuOption{
 		@Override
 		void execute(GameEngine engine) {
 			// TODO Auto-generated method stub
-			System.out.println("How many games should the computers play?");
-			int rounds = Main.Scan.nextInt();	
-			engine.runningGame.setGameType(GameType.CvC);
-			engine.setGameRounds(rounds);
+			engine.runningGame = new Game(GameType.CvC);
 		}
 
 		@Override
 		String getPrompt() {
 			// TODO Auto-generated method stub
 			return "Computer vs. Computer";
+		}
+
+		@Override
+		int getGameRounds()
+		{
+			System.out.println("How many games should the computers play?");
+			int rounds = Main.Scan.nextInt();	
+			return rounds;
 		}
 		
 	},
@@ -116,11 +130,18 @@ enum MenuOption{
 			// TODO Auto-generated method stub
 			return "Quit Game";
 		}
-		
+
+		@Override
+		int getGameRounds()
+		{
+			// TODO Auto-generated method stub
+			return 0;
+		}		
 	};
-	String prompt;
+	
 	abstract void execute(GameEngine engine);
 	abstract String getPrompt();
+	abstract int getGameRounds();
 	
 	public static MenuOption getValue(int valueNumber){
 		return values()[valueNumber];

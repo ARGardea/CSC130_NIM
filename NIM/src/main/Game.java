@@ -12,20 +12,13 @@ public class Game
 	boolean isValidTurn = true;
 	boolean firstPlayerTurn = true;
 	int numberOfTurns = 0;
-	int roundsToPlay = 0;
 	
-	public Game() {
-		this.roundsToPlay = 1;
-	}
-	
-	public void setRoundsToPlay(int roundsToPlay){
-		this.roundsToPlay = roundsToPlay;
-	}
-	
-	public void setGameType(GameType type){
+	public Game(GameType type) {
 		this.type = type;
+		this.setupGame();
+//		this.roundsToPlay = 1;
 	}
-	
+
 	public void startNewTurn() {
 		numberOfTurns++;
 		printPlayerTurnMessage();
@@ -72,7 +65,7 @@ public class Game
 		System.out.println(currentPlayerName + ", it's your turn!");
 	}
 
-	public void gameLoop() {
+	public void gameLoop(int roundsToPlay) {
 		while (roundsToPlay > 0) {
 			board = new GameBoard();
 			boolean gameComplete = false;
@@ -109,13 +102,13 @@ enum GameType
 			game.setPlayers(new Human("Player 1"), new Human("Player 2"));
 		}
 	},
-	PvC{
+	PvC {
 		@Override 
 		void createPlayers(Game game){
 			game.setPlayers(new Human("Player"), new Computer("Computer"));
 		}
 	},
-	CvC{
+	CvC {
 		@Override 
 		void createPlayers(Game game){
 			game.setPlayers(new Computer("Computer 1"), new Computer("Computer 2"));
