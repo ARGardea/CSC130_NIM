@@ -26,7 +26,7 @@ public class TurnEvaluator
 		
 		int totalTurns = historyToEvaluate.getNumberOfBoardStates();
 		
-		boolean wasLastTurnWin = historyToEvaluate.wasLastBoardStateWin();
+		boolean wasLastTurnWin = historyToEvaluate.calculateLastStateWin();
 		
 		float startingScore = (wasLastTurnWin)? 1:-1;
 		
@@ -72,7 +72,6 @@ public class TurnEvaluator
 	}
 	
 	public TurnAction tryToReachBoardState(BoardState startingState, BoardState endingState){
-		TurnAction suggestedAction = null;
 		
 		Iterator stateComparisonResults = compareStates(startingState, endingState);
 		int selectedRow = noRowSelected;
@@ -83,6 +82,7 @@ public class TurnEvaluator
 		int rowNumber = 1;
 		
 		boolean comparisonInProgress = stateComparisonResults.hasNext();
+		TurnAction suggestedAction = null;
 		
 		while(comparisonInProgress){
 			checkedRowTokens = (Integer)stateComparisonResults.next();

@@ -6,17 +6,13 @@ import java.util.Iterator;
 public class GameHistory
 {
 	private ArrayList<BoardState> stateList;
-	private boolean wasLastStateWin;
 	
 	public GameHistory() {
 		stateList = new ArrayList<BoardState>();
 	}
 	
-	public void calculateLastStateWin(){
-		wasLastStateWin = (stateList.get(stateList.size() - 1).getBoardStateRowSum() == 0);
-	}
-	
-	public boolean wasLastBoardStateWin(){
+	public boolean calculateLastStateWin(){
+		boolean wasLastStateWin = (stateList.get(stateList.size() - 1).getBoardStateRowSum() == 0);
 		return wasLastStateWin;
 	}
 	

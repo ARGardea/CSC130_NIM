@@ -56,13 +56,12 @@ public class BoardState implements Iterable{
 	
 	public int getBoardStateCode(){
 		String concatenatedRowValues = "";
-		int boardStateCode = 0;
 		
 		for(int rowTokens: rows){
 			concatenatedRowValues += rowTokens;
 		}
 		
-		boardStateCode = Integer.parseInt(concatenatedRowValues);
+		int boardStateCode = Integer.parseInt(concatenatedRowValues);
 		
 		return boardStateCode;
 	}
